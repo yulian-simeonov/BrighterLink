@@ -1,0 +1,32 @@
+<html>
+<script type="text/javascript" src="tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+function SetText (txtValue) 
+{
+    if (!tinymce.editors['textareaWidget']) {
+        tinymce.init({
+            selector: '#textareaWidget',
+            plugins: 'link',
+            relative_urls: true,
+            height : '60',
+            toolbar: 'undo redo | formatselect | fontsizeselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            fontsize_formats: "0.75em 1em 1.2em 1.5em 1.8em 2em 2.45em 3em",
+            setup: function (ed) {
+                ed.on('init', function(args) {
+                    tinymce.activeEditor.setContent(txtValue || '');
+                });
+            }
+        });
+    } else {
+        tinymce.activeEditor.setContent(txtValue || '');
+    }
+};
+
+function GetText()
+{
+    return tinyMCE.get('textareaWidget').getContent();
+};
+SetText('');
+</script>
+<textarea id="textareaWidget"></textarea>
+</html>
